@@ -22,6 +22,7 @@
 
 #define NORMALYZE_NO 0
 #define NORMALYZE_SIMPLE 1
+#define NORMALYZE_SIMPLE_LINE 2
 
 class NN;
 

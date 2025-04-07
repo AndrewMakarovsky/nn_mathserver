@@ -403,7 +403,9 @@ void NeuralNetwork::SetPatterns(double* _X, double* _Y, int norm_type)
 	{
 	case NORMALYZE_NO:
 		break;
+
 	case NORMALYZE_SIMPLE:
+	{
 		double min = 99999999;
 		double max = -99999999;
 
@@ -428,6 +430,38 @@ void NeuralNetwork::SetPatterns(double* _X, double* _Y, int norm_type)
 		}
 
 		break;
+	}
+
+	case NORMALYZE_SIMPLE_LINE:
+	{
+		p = X;
+		double* p2 = X;
+
+		for (int i = 0; i < pqnt; i++)
+		{
+			double min = 99999999;
+			double max = -99999999;
+
+			for (int j = 0; j < in_n; j++, p++)
+			{
+				if (min > *p)
+				{
+					min = *p;
+				}
+				if (max < *p)
+				{
+					max = *p;
+				}
+			}
+
+			for (int j = 0; j < in_n; j++, p2++)
+			{
+				*p2 = (*p2 - min) / (max - min);
+			}
+		}
+
+		break;
+	}
 	}
 
 	for (int i = 0; i < pqnt * out_n; i++)
