@@ -126,7 +126,7 @@ NeuralNetwork::NeuralNetwork(int n, int _nlayers, int _pqnt, int _pqnt_blocks, i
 		}
 	}
 
-	for (int i = 0; i < nthreads; i++)
+	/*for (int i = 0; i < nthreads; i++)
 	{
 		NNLayer* cld = parnetw[i]->Wfirst;
 		NNLayer* cl = Wfirst;
@@ -146,7 +146,7 @@ NeuralNetwork::NeuralNetwork(int n, int _nlayers, int _pqnt, int _pqnt_blocks, i
 			cld = cld->next;
 			cl = cl->next;
 		}
-	}
+	}*/
 
 	if (tracebufcnt - tracebufw > 0)
 	{
@@ -220,9 +220,9 @@ NeuralNetwork::NeuralNetwork(char* fname, int tbcnt, char* buf, int opt) : NNObj
 			}
 
 			fin.read((char*)nl->Theta, l_out_n * (l_in_n + 1) * sizeof(double));
-			fin.read((char*)nl->ThetaM, l_out_n * l_in_n * sizeof(double));
+			//fin.read((char*)nl->ThetaM, l_out_n * l_in_n * sizeof(double));
 			fin.read((char*)nl->ThetaT, l_out_n * (l_in_n + 1) * sizeof(double));
-			fin.read((char*)nl->ThetaMT, l_out_n * l_in_n * sizeof(double));
+			//fin.read((char*)nl->ThetaMT, l_out_n * l_in_n * sizeof(double));
 		}
 
 		for (int i = 0; i < nthreads; i++)
@@ -273,9 +273,9 @@ NeuralNetwork::NeuralNetwork(char* fname, int tbcnt, char* buf, int opt) : NNObj
 				}
 
 				fin.read((char*)nl->Theta, l_out_n * (l_in_n + 1) * sizeof(double));
-				fin.read((char*)nl->ThetaM, l_out_n * l_in_n * sizeof(double));
+				//fin.read((char*)nl->ThetaM, l_out_n * l_in_n * sizeof(double));
 				fin.read((char*)nl->ThetaT, l_out_n * (l_in_n + 1) * sizeof(double));
-				fin.read((char*)nl->ThetaMT, l_out_n * l_in_n * sizeof(double));
+				//fin.read((char*)nl->ThetaMT, l_out_n * l_in_n * sizeof(double));
 			}
 		}
 
@@ -727,7 +727,7 @@ void  NeuralNetwork::SetParallelTheta()
 		}
 	}
 
-	for (int i = 0; i < nthreads; i++)
+	/*for (int i = 0; i < nthreads; i++)
 	{
 		NN* nn = parnetw[i];
 		NNLayer* cl = nn->Wfirst;
@@ -749,7 +749,7 @@ void  NeuralNetwork::SetParallelTheta()
 			tcl = tcl->next;
 			cl = cl->next;
 		}
-	}
+	}*/
 }
 
 int NeuralNetwork::GetSumQnt()
@@ -868,9 +868,9 @@ int NeuralNetwork::Save(char* fname)
 				fout->write((const char*)&nl->pqnt, sizeof(int));
 
 				fout->write((const char*)nl->Theta, nl->n * (nl->m + 1) * sizeof(double));
-				fout->write((const char*)nl->ThetaM, nl->n * nl->m * sizeof(double));
+				//fout->write((const char*)nl->ThetaM, nl->n * nl->m * sizeof(double));
 				fout->write((const char*)nl->ThetaT, nl->n * (nl->m + 1) * sizeof(double));
-				fout->write((const char*)nl->ThetaMT, nl->n * nl->m * sizeof(double));
+				//fout->write((const char*)nl->ThetaMT, nl->n * nl->m * sizeof(double));
 
 				nl = nl->next;
 			}
@@ -899,9 +899,9 @@ int NeuralNetwork::Save(char* fname)
 					fout->write((const char*)&nl->pqnt, sizeof(int));
 
 					fout->write((const char*)nl->Theta, nl->n * (nl->m + 1) * sizeof(double));
-					fout->write((const char*)nl->ThetaM, nl->n * nl->m * sizeof(double));
+					//fout->write((const char*)nl->ThetaM, nl->n * nl->m * sizeof(double));
 					fout->write((const char*)nl->ThetaT, nl->n * (nl->m + 1) * sizeof(double));
-					fout->write((const char*)nl->ThetaMT, nl->n * nl->m * sizeof(double));
+					//fout->write((const char*)nl->ThetaMT, nl->n * nl->m * sizeof(double));
 
 					nl = nl->next;
 				}

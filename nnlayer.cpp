@@ -22,8 +22,8 @@ NNLayer::NNLayer(int _layerno, int _n, int _m, int _pqnt, double _rand_epsilon,
 
 	Theta = new double[n * (m + 1)];
 	ThetaT = new double[n * (m + 1)];
-	ThetaM = new double[n * m];
-	ThetaMT = new double[n * m];
+	//ThetaM = new double[n * m];
+	//ThetaMT = new double[n * m];
 	Line = new dpoint[n];
 	LineT = new dpoint[m + 1];
 	A = new double[n];
@@ -76,8 +76,8 @@ NNLayer::~NNLayer()
 		delete[] In;
 		delete[] LineT;
 		delete[] Line;
-		delete[] ThetaMT;
-		delete[] ThetaM;
+		//delete[] ThetaMT;
+		//delete[] ThetaM;
 		delete[] ThetaT;
 		delete[] Theta;
 		delete[] Grad;
@@ -105,7 +105,7 @@ void NNLayer::ThetaTran()
 		dest++;
 	}	
 	
-	src = ThetaM;
+	/*src = ThetaM;
 	dest = ThetaMT;
 
 	for (int i = 0; i < n; i++)
@@ -116,7 +116,7 @@ void NNLayer::ThetaTran()
 			src++;
 		}
 		dest++;
-	}
+	}*/
 }
 
 void NNLayer::InitIter()
@@ -158,90 +158,8 @@ void NNLayer::Forward(double* X, double* Y)
 	default:
 		break;
 	}
+
 	return;
-
-	//double* pc = Y;
-	double* x = X;
-	double* y = Y;
-	double* a = A;
-	double* z = Z;
-	double* in = In;
-
-	//*y = 0.0;
-	//fill8arr(n, y);
-	for (int i = 0; i < n; i++)
-	{
-		*y++ = 0;
-	}
-	y = Y;
-
-	//*z = 0.0;
-	//fill8arr(n, z);
-
-	for (int i = 0; i < n; i++)
-	{
-		*z++ = 0;
-	}
-	z = Z;
-
-	movsdq(m, In, x);
-
-	/*for (int i = 0; i < n; i++)
-	{
-		*pc++ = 0;
-	}*/
-
-	for (int i = 0; i < m; i++)
-	{
-		*in++ = *x++;
-	}
-	x = X;
-
-	/*for (int i = 0; i < n; i++)
-	{
-		*z++ = 0;
-	}*/
-
-	//z = Z;
-
-	//unsigned long long nm = 0;
-
-	//*(unsigned int*)&nm = m;
-	//*(((unsigned int*)&nm) + 1) = n;
-
-	//double* th = Theta;
-	forwbs(n, m, Z, X, Theta);
-
-	//for (int i = 0; i < n; i++)
-	//{
-		//double* th = Theta + i * (m + 1);
-		//x = X;
-
-		//*z += *th++; //Умноженное на 1.0
-		//for (int j = 1; j < m + 1; j++)
-		//{
-			//*z += (*th++ * *x++);
-		//}
-		//v8mult(m, x, th, z);
-		//th += m;
-		//*a++ = Sigmoid(*z);
-		//z++;
-	//}
-
-	/*a = A;
-	z = Z;*/
-	for (int i = 0; i < n; i++)
-	{
-     	*a++ = 1.0 / (1.0 + exp(-*z++));
-	}
-
-	//movsdq(n, Y, A);
-	y = Y;
-	a = A;
-	for (int i = 0; i < m; i++)
-	{
-		*y++ = *a++;
-	}
 }
 
 void NNLayer::ForwardCPP(double* X, double* Y)
@@ -617,7 +535,7 @@ void NNLayer::UpdateWeights(double lambda, double lambdareg)
 {
 	double* grad = Grad;
 	double* t = Theta;
-	double* tm = ThetaM;
+	//double* tm = ThetaM;
 
 	for (int i = 0; i < (m + 1) * n; i++)
 	{
@@ -626,7 +544,7 @@ void NNLayer::UpdateWeights(double lambda, double lambdareg)
 		grad++;
 	}
 
-	t = Theta;
+	/*t = Theta;
 	for (int i = 0; i < n; i++)
 	{
 		t++;
@@ -634,7 +552,7 @@ void NNLayer::UpdateWeights(double lambda, double lambdareg)
 		{
 			*tm++ = *t++;
 		}
-	}
+	}*/
 
 	ThetaTran();
 }
@@ -654,7 +572,7 @@ double NNLayer::SigmoidP(double x)
 void NNLayer::TInit()
 {
 	double* p = Theta;
-	double* tm = ThetaM;
+	//double* tm = ThetaM;
 
 	for (int i = 0; i < n * (m + 1); i++)
 	{
@@ -662,7 +580,7 @@ void NNLayer::TInit()
 		p++;
 	}
 
-	p = Theta;
+	/*p = Theta;
 	for (int i = 0; i < n; i++)
 	{
 		p++;
@@ -670,7 +588,7 @@ void NNLayer::TInit()
 		{
 			*tm++ = *p++;
 		}
-	}
+	}*/
 
 	ThetaTran();
 }

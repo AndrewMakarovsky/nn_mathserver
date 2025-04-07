@@ -274,7 +274,7 @@ double NN::Learn(int pqnt_block_no, double lambda, double epsilon, double lambda
 
 		while (l != NULL)
 		{
-			r += l->Norma2(l->ThetaM, l->n * l->m);
+			r += l->Norma2(l->Theta, l->n * (l->m + 1));
 			l = l->next;
 			lnum++;
 		}

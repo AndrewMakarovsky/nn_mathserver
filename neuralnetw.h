@@ -103,9 +103,9 @@ public:
 	int tracebufcnt;       //Размер буфера трассировки
 	int* tracebufw;         //Записано в буфер трассировки
 	double* Theta;         //С добавленным столбцом начальных смещений
-	double* ThetaM;        //Без добавленного столбца начальных смещений
+	//double* ThetaM;        //Без добавленного столбца начальных смещений
 	double* ThetaT;
-	double* ThetaMT;
+	//double* ThetaMT;
 	dpoint* Line;
 	dpoint* LineT;
 	double* A;
