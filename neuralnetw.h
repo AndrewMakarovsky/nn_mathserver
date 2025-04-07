@@ -20,6 +20,9 @@
 #define OPTIMIZATION_ASM64 1
 #define OPTIMIZATION_ASM64_XEON 2
 
+#define NORMALYZE_NO 0
+#define NORMALYZE_SIMPLE 1
+
 class NN;
 
 #pragma pack(push, 1)
@@ -240,11 +243,11 @@ public:
 	~NeuralNetwork();
 
 	//Загрузка pqnt образцов для обучения сети
-	void SetPatterns(double* _X, double* _Y);
+	void SetPatterns(double* X, double* Y, int norm_type);
 
 	nnLearnResultParms Learn(int maxiter, double lambda = 1.0, double epsilon = 0.1, double lambdareg = 0);
 
-	void Recognize(double* _X, double* _Y);
+	void Recognize(double* X, double* Y);
 
 	int Save(char* fname);   //Сохранение обученной нейронной сети
 

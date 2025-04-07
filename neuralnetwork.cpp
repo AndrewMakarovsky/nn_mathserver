@@ -384,16 +384,50 @@ NeuralNetwork::~NeuralNetwork()
 }
 
 //Загрузка pqnt образцов для обучения сети
-void NeuralNetwork::SetPatterns(double* _X, double* _Y)
+void NeuralNetwork::SetPatterns(double* _X, double* _Y, int norm_type)
 {
 	double* x = X;
 	double* y = Y;
 	double* _x = _X;
 	double* _y = _Y;
+	double* p;
 
 	for (int i = 0; i < pqnt * in_n; i++)
 	{
 		*x++ = *_x++;
+	}
+
+	//x = X;
+
+	switch (norm_type)
+	{
+	case NORMALYZE_NO:
+		break;
+	case NORMALYZE_SIMPLE:
+		double min = 99999999;
+		double max = -99999999;
+
+		p = X;
+		for (int j = 0; j < pqnt * in_n; j++, p++)
+		{
+			if (min > *p)
+			{
+				min = *p;
+			}
+			if (max < *p)
+			{
+				max = *p;
+			}
+		}
+
+		p = X;
+		for (int i = 0; i < pqnt * in_n; i++)
+		{
+			*p = (*p - min) / (max - min);
+			p++;
+		}
+
+		break;
 	}
 
 	for (int i = 0; i < pqnt * out_n; i++)

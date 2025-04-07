@@ -71,6 +71,7 @@ struct nnSetPatternsFromFilesParms
 	long long nnet;
 	int n;
 	int m;
+	int norm_type;
 	char* f1;
 	char* f2;
 };

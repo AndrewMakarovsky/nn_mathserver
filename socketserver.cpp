@@ -623,10 +623,13 @@ void MySocketServer::nnSetPatternsFromFiles(int client)
 
 	in2.close();
 
-	nn->SetPatterns(X, Y);
+	nn->SetPatterns(X, Y, parms.norm_type);
 
-	delete Y;
-	delete X;
+	delete[] parms.f1;
+	delete[] parms.f2;
+
+	delete[] Y;
+	delete[] X;
 }
 
 double MySocketServer::nnLearn(int client)
