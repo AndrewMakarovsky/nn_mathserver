@@ -94,7 +94,7 @@ void MySocketServer::listenClient()
 			break;
 
 		case nnSetPatterns_Function:
-			nnSetPatterns(clientSocket);
+			//nnSetPatterns(clientSocket);
 			break;
 
 		case nnSetPatternsFromFiles_Function:
@@ -480,7 +480,7 @@ void MySocketServer::nnDelete(int client)
 	delete nn;
 	nnetw = NULL;
 }
-
+/*
 void MySocketServer::nnSetPatterns(int client)
 {
 	nnSetPatternsParms parms;
@@ -521,7 +521,7 @@ void MySocketServer::nnSetPatterns(int client)
 
 	delete _Y;
 	delete _X;
-}
+}*/
 
 void MySocketServer::nnWriteFileBlock(int client)
 {

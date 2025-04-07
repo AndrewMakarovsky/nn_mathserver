@@ -111,7 +111,7 @@ public:
 	void nnCreate(int client);
 	void nnLoad(int client);
 	void nnDelete(int client);
-	void nnSetPatterns(int client);
+	//void nnSetPatterns(int client);
 	void nnSetPatternsFromFiles(int client);
 	double nnLearn(int client);
 	void nnRecognize(int client);
