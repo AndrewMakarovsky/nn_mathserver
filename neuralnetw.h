@@ -1,7 +1,7 @@
 //Библиотека динамической компоновки для математических вычислений
-//Автор: А.Б. Макаровский
+//Автор: А.Б. Макаровский aka Алёна Барысаўна З Новасібірска, https://vk.com/andmk
 //Версия 1.0
-//17 декабря 2023 г.
+//8.04.2025 г.
 
 #pragma once
 
@@ -108,10 +108,10 @@ public:
 	int* tracebufw;         //Записано в буфер трассировки
 	double* Theta;         //С добавленным столбцом начальных смещений
 	//double* ThetaM;        //Без добавленного столбца начальных смещений
-	double* ThetaT;
+	//double* ThetaT;
 	//double* ThetaMT;
 	dpoint* Line;
-	dpoint* LineT;
+	//dpoint* LineT;
 	double* A;
 	double* Z;
 	double* In;

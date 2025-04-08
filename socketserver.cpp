@@ -600,6 +600,9 @@ void MySocketServer::nnSetPatternsFromFiles(int client)
 	NeuralNetwork* nn = (NeuralNetwork*)parms.nnet;
 	if (parms.n != nn->in_n * nn->pqnt || parms.m != nn->out_n * nn->pqnt)
 	{
+		delete[] parms.f1;
+	    delete[] parms.f2;
+
 		throw xml_incorrect_data();
 	}
 
@@ -611,6 +614,14 @@ void MySocketServer::nnSetPatternsFromFiles(int client)
 	{
 		in.read((char*)X, n * sizeof(double));
 	}
+	else
+	{
+		delete[] X;
+		delete[] parms.f1;
+	    delete[] parms.f2;
+
+		throw xml_incorrect_file();
+	}
 
 	in.close();
 
@@ -619,6 +630,15 @@ void MySocketServer::nnSetPatternsFromFiles(int client)
 	if (in2.is_open())
 	{
 		in2.read((char*)Y, m * sizeof(double));
+	}
+	else
+	{
+		delete[] X;
+		delete[] Y;
+		delete[] parms.f1;
+	    delete[] parms.f2;
+
+		throw xml_incorrect_file();
 	}
 
 	in2.close();
@@ -757,7 +777,7 @@ void MySocketServer::nnGetLastError(int client)
 
 	if (ret > 0)
 	{
-		rqnt = send(client, (void*)dataBuffer, ret, 0);
+		rqnt = send(client, (void*)lastEror, ret, 0);
 		if (rqnt != ret)
 	    {
 		    throw send_error();

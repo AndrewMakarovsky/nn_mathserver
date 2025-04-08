@@ -21,11 +21,11 @@ NNLayer::NNLayer(int _layerno, int _n, int _m, int _pqnt, double _rand_epsilon,
 	optimization = opt;
 
 	Theta = new double[n * (m + 1)];
-	ThetaT = new double[n * (m + 1)];
+	//ThetaT = new double[n * (m + 1)];
 	//ThetaM = new double[n * m];
 	//ThetaMT = new double[n * m];
 	Line = new dpoint[n];
-	LineT = new dpoint[m + 1];
+	//LineT = new dpoint[m + 1];
 	A = new double[n];
 	Z = new double[n];
 	In = new double[m + 1];
@@ -50,10 +50,10 @@ NNLayer::NNLayer(int _layerno, int _n, int _m, int _pqnt, double _rand_epsilon,
 		*p2++ = 0;
 	}
 
-	for (int i = 0; i < m + 1; i++)
+	/*for (int i = 0; i < m + 1; i++)
 	{
 		LineT[i] = ThetaT + i * n;
-	}
+	}*/
 
 	TInit();
 }
@@ -74,11 +74,11 @@ NNLayer::~NNLayer()
 		delete[] Z;
 		delete[] A;
 		delete[] In;
-		delete[] LineT;
+		//delete[] LineT;
 		delete[] Line;
 		//delete[] ThetaMT;
 		//delete[] ThetaM;
-		delete[] ThetaT;
+		//delete[] ThetaT;
 		delete[] Theta;
 		delete[] Grad;
 		delete[] Gsum;
@@ -90,7 +90,7 @@ NNLayer::~NNLayer()
 	}
 }
 
-void NNLayer::ThetaTran()
+/*void NNLayer::ThetaTran()
 {
 	double* src = Theta;
 	double* dest = ThetaT;
@@ -105,7 +105,7 @@ void NNLayer::ThetaTran()
 		dest++;
 	}	
 	
-	/*src = ThetaM;
+	src = ThetaM;
 	dest = ThetaMT;
 
 	for (int i = 0; i < n; i++)
@@ -116,8 +116,8 @@ void NNLayer::ThetaTran()
 			src++;
 		}
 		dest++;
-	}*/
-}
+	}
+}*/
 
 void NNLayer::InitIter()
 {
@@ -188,14 +188,6 @@ void NNLayer::ForwardCPP(double* X, double* Y)
 	}
 	x = X;
 
-	//unsigned long long nm = 0;
-
-	//*(unsigned int*)&nm = m;
-	//*(((unsigned int*)&nm) + 1) = n;
-
-	//double* th = Theta;
-	//forwbs(n, m, Z, X, Theta);
-
     a = A;
 	z = Z;
 	for (int i = 0; i < n; i++)
@@ -210,21 +202,11 @@ void NNLayer::ForwardCPP(double* X, double* Y)
 			th++;
 			x++;
 		}
-		//v8mult(m, x, th, z);
 
-		//th += m;
 		*a++ = Sigmoid(*z);
 		z++;
 	}
 
-	/*a = A;
-	z = Z;
-	for (int i = 0; i < n; i++)
-	{
-     	*a++ = 1.0 / (1.0 + exp(-*z++));
-	}*/
-
-	//movsdq(n, Y, A);
 	y = Y;
 	a = A;
 	for (int i = 0; i < n; i++)
@@ -307,10 +289,13 @@ void NNLayer::BackDelta()
 	double* dnext;
 	double* a = A;
 	double* th;
+	double* th2;
 
-	th = this->next->ThetaT;
-	int qnt = this->next->n;
-	th += qnt;
+	th = this->next->Theta;
+	int qnt_n = this->next->n;
+	int qnt_m = this->next->m;
+	//th += qnt;
+	th++;
 	double* delta_next = this->next->Delta;
 
 	for (int i = 0; i < n; i++)
@@ -319,11 +304,15 @@ void NNLayer::BackDelta()
 		dnext = delta_next;
 		//v8mult(qnt, dnext, th, d);
 		//th += qnt;
+		th2 = th;
 
-		for (int j = 0; j < qnt; j++)
+		for (int j = 0; j < qnt_n; j++)
 		{
-			*d += (*th++ * *dnext++);
+			*d += (*th * *dnext++);
+			th += (qnt_m + 1);
 		}
+
+		th = th2 + 1;
 
 		*d *= (*a * (1 - *a));
 		a++;
@@ -554,7 +543,7 @@ void NNLayer::UpdateWeights(double lambda, double lambdareg)
 		}
 	}*/
 
-	ThetaTran();
+	//ThetaTran();
 }
 
 double NNLayer::Sigmoid(double x)
@@ -590,7 +579,7 @@ void NNLayer::TInit()
 		}
 	}*/
 
-	ThetaTran();
+	//ThetaTran();
 }
 
 double NNLayer::Norma2(double* a, double* b, int qnt)

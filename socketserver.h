@@ -52,6 +52,16 @@ public:
 	}
 };
 
+class xml_incorrect_file : public std::exception
+{
+	std::string info;
+public:
+	xml_incorrect_file(std::string e = "File cannot be opened") : info(e) {}
+	const char* what() const noexcept {
+		return info.c_str();
+	}
+};
+
 struct DataXML
 {
 	bool arrayFlag = false;
