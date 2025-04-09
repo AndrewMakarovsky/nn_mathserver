@@ -10,6 +10,19 @@
 //≈сли эта работа нужна, просьба сделать пожервование (любую сумму, от 100 руб.) на карту јльфа банка 4261 0126 3850 2139,
 //на хабре или заказать услуги (в основном банковские карты и другие услуги крупнейших банков) по моей партнЄрской ссылке
 //на странице https://vk.com/andmk, если они окажутс€ нужными.
+// 
+//Dynamic layout library for mathematical calculations (example of a client program)
+//Author: A.B. Makarovsky aka Alena Barysaina Z Novasibirska, https://vk.com/andmk
+//Version 1.0
+//04/9/2025
+//The perceptron learning algorithm is described in the article "Monte Carlo method in the algorithm of reverse error propagation
+//with parallel computing", published at https://habr.com/ru/articles/897928/
+//Only a neural network has been made in the 1st approximation, what relates to linear algebra has not been really tested (there are big plans here).
+//The neural network can also be improved - implement various algorithms to reduce the dimension of the source data space,
+//implement an Assembler version specifically for Xeon processors, etc.
+//If this work is needed, please make a donation (any amount starting from 100 rubles) to the Alfa Bank card 4261 0126 3850 2139,
+//on habr or to order services (mainly bank cards and other services of the largest banks) using my partner link
+//on the page https://vk.com/andmk if they turn out to be needed.
 
 #pragma once
 
