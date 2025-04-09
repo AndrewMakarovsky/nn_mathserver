@@ -11,7 +11,7 @@
 //на хабре или заказать услуги (в основном банковские карты и другие услуги крупнейших банков) по моей партнёрской ссылке
 //на странице https://vk.com/andmk, если они окажутся нужными.
 // 
-//Dynamic layout library for mathematical calculations (example of a client program)
+//Dynamic layout library for mathematical calculations
 //Author: A.B. Makarovsky aka Alena Barysaina Z Novasibirska, https://vk.com/andmk
 //Version 1.0
 //04/9/2025
